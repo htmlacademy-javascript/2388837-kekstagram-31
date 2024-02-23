@@ -1,22 +1,21 @@
-function calculation_string_user(user_string, user_max_number) {
-  if (user_string.length <= user_max_number) {
-      console.log(true);
-      return true;
-  } else {
-      console.log(false);
-      return false;
-  }
 
-}
-calculation_string_user("проверяемаяASDASDASD", 20);
+const checksTheString = (userString, userMaxNumber) => userString.length <= userMaxNumber ? 'true' : 'false';
 
-function isPalindrome(str) {
-  let normalaze_str = str.replaceAll(' ', '').toLowerCase().length;
-  let reverse_str = '';
-  for (let i = normalaze_str - 1; i >= normalaze_str; i--) {
-      reversedStr += normalizedStr[i];
+checksTheString('проверяемая строка', 20); // true
+
+checksTheString('проверяемая строка', 18); // true
+
+checksTheString('проверяемая строка', 10); // false
+
+
+const checksForPalindromy = (str) => {
+  const normalizeString = str.replaceAll(' ', '').toLowerCase().length;
+  let reversedStr = '';
+  for (let i = normalizeString - 1; i >= 0; i--) {
+    reversedStr += normalizeString[i];
   }
-  return normalizedStr === reversedStr;
-}
-const testString = "пап";
-console.log(isPalindrome(testString));
+  return normalizeString === reversedStr;
+};
+checksForPalindromy('топот'); // true
+checksForPalindromy('ДовОд'); // true
+checksForPalindromy('Кекс'); // false
