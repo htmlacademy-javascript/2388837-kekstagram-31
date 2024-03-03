@@ -1,52 +1,52 @@
-const id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-// генерация url
-const urlFnWrapper = () => {
-  const allArrayPhoto = [];
-  return function urlCicle() {
-    for (let i = 0; i < id.length; i++) {
-      allArrayPhoto.push(`..photos/${id[i]}.jpg`);
-    }
-    return allArrayPhoto;
-  };
-};
 
+import { DESCRIPTION,MESSAGE,NAMES } from './data.js';
 
-// делает из типа функции в массив
-const generaite = urlFnWrapper();
-const avatar = generaite();
+// Структура каждого объекта должна быть следующей:
 
-const message = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-];
-
-const name = [
-  'Maga',
-  'Sergo',
-  'Zud',
-  'Zoxa',
-  'Tigo',
-];
-
+// todo создайт случайные чисела
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
+  const result = Math.random() * (upper - lower + 1) + lower; // не понимаю эту запись , что тут происходит и для чего.
   return Math.floor(result);
 };
+//Todo Создаёт функцию счетчик для того чтобы повторов не было и будет вызываться N количество раз, сколько потребуется в array.from
+const CREAT_NUMBER = () => {
+  let RESULT_UMBER = 0;
+  return function () {
+    RESULT_UMBER += 1;
+    return RESULT_UMBER;
+  };
+};
 
-const getRandomArrayRlement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-const objPerson = () => ({
-  id: getRandomArrayRlement(id),
-  avatar: getRandomArrayRlement(avatar),
-  message: getRandomArrayRlement(message),
-  name: getRandomArrayRlement(name),
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+const REPEAT_OBJ = 25;
+const MIN_AVATAR = 1;
+const MAX_AVATAR = 6;
+const COMMENTS_MIN = 0;
+const COMMENTS_MAX = 30;
+const CREAT_ID = CREAT_NUMBER();
+const CREAT_URL = CREAT_NUMBER();
+
+const CREAT_COMMENT = () => ({
+  id: CREAT_ID(),
+  avatar: `img/avatar/${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
+  message: MESSAGE[getRandomInteger(0, MESSAGE.length - 1)],
+  name: NAMES[getRandomInteger(0, NAMES.length)],
 });
-const numberRepeat = 30;
-const repeatObj = Array.from({ length: numberRepeat }, objPerson);
-// eslint-disable-next-line no-console
-console.log(repeatObj);
+const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
+  id: CREAT_ID(),
+  url: `..photos/${CREAT_URL()}.jpg`,
+  description: DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)],
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: Array.from({length:getRandomInteger(COMMENTS_MIN,COMMENTS_MAX)},CREAT_COMMENT),
+}));
+
+console.log(CREAT_PHOTO);
+// comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к
+// каждой фотографии — случайное число от 0 до 30. Все комментарии генерируются случайным образом.
+// У каждого комментария есть идентификатор — id — любое число. Идентификаторы не должны повторяться.
+
+
+
