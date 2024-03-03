@@ -42,11 +42,5 @@ const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
   likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
   comments: Array.from({length:getRandomInteger(COMMENTS_MIN,COMMENTS_MAX)},CREAT_COMMENT),
 }));
-
+// eslint-disable-next-line no-console
 console.log(CREAT_PHOTO);
-// comments, массив объектов — список комментариев, оставленных другими пользователями к этой фотографии. Количество комментариев к
-// каждой фотографии — случайное число от 0 до 30. Все комментарии генерируются случайным образом.
-// У каждого комментария есть идентификатор — id — любое число. Идентификаторы не должны повторяться.
-
-
-
