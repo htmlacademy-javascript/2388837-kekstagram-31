@@ -1,36 +1,35 @@
-const DESCRIPTION = [
-  'Пейзаж с заходящим солнцем над горизонтом, окрашивающий небо в оттенки розового и оранжевого.',
-  'Портрет молодой женщины с улыбкой, окруженной цветущими полянами и яркими цветами.',
-  'Городской пейзаж ночного времени с высотного здания, огни которого отражаются в реке.',
-  'Макро-снимок капли росы на лепестке розы, преломляющей свет и создающей игру цветов и теней.',
-  'Дикий лев, спокойно лежащий на саванне, с взглядом направленным вдаль.',
-  'Абстрактная композиция из силуэтов людей, сливающихся в одно общее движение на фоне города.',
-  'Фотография птицы, парящей в воздухе с расправленными крыльями, на фоне голубого неба.',
-  'Подводный мир с разноцветными кораллами и рыбами, плавающими вокруг.',
-  'Макро-снимок пушистой пчелы, собирающей нектар на цветке, с яркими деталями крыльев и мордочки.',
-  'Атмосферный пейзаж горного озера в тумане, с отражением окружающих вершин на гладкой водной поверхности.'
-];
 
-const MESSAGE = [
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов, это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота, и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-const NAMES = [
-  'Тигран',
-  'Зоха',
-  'Максим',
-  'Сергей',
-  'Полина',
-  'Мага',
-  'Александр',
-  'Екатерина',
-  'Иван',
-  'Анна',
-  'Дмитрий',
-  'Елена',
-  'Наталья'
-];
-export {DESCRIPTION,MESSAGE,NAMES};
+// !импорт всехперменных
+import { DESCRIPTION,MESSAGE,NAMES,MIN_LIKES,MAX_LIKES,REPEAT_OBJ,MIN_AVATAR,MAX_AVATAR,COMMENTS_MIN,COMMENTS_MAX } from './util.js';
+// ! импорт функции случайноного числа а до b
+import { getRandomInteger} from './random-integer.js';
+
+//Todo Создаёт функцию счетчик для того чтобы повторов не было и будет вызываться N количество раз, сколько потребуется в array.from
+const CREAT_NUMBER = () => {
+  let RESULT_UMBER = 0;
+  return function () {
+    RESULT_UMBER += 1;
+    return RESULT_UMBER;
+  };
+};
+
+
+const CREAT_ID = CREAT_NUMBER();
+const CREAT_URL = CREAT_NUMBER();
+
+const CREAT_COMMENT = () => ({
+  id: CREAT_ID(),
+  avatar: `img/avatar/${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
+  message: MESSAGE[getRandomInteger(0, MESSAGE.length - 1)],
+  name: NAMES[getRandomInteger(0, NAMES.length)],
+});
+
+const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
+  id: CREAT_ID(),
+  url: `..photos/${CREAT_URL()}.jpg`,
+  description: DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)],
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: Array.from({ length: getRandomInteger(COMMENTS_MIN, COMMENTS_MAX) }, CREAT_COMMENT),
+}));
+// eslint-disable-next-line no-console
+console.log(CREAT_PHOTO);
