@@ -26,10 +26,10 @@ const CREAT_COMMENT = () => ({
 
 const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
   id: CREAT_ID(),
-  url: `..photos/${CREAT_URL()}.jpg`,
+  url: `photos/${CREAT_URL()}.jpg`,
   description: getValue().DESCRIPTION[getRandomInteger(0, getValue().DESCRIPTION.length - 1)],
   likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
   comments: Array.from({ length: getRandomInteger(COMMENTS_MIN, COMMENTS_MAX) }, CREAT_COMMENT),
 }));
-// eslint-disable-next-line no-console
-console.log(CREAT_PHOTO);
+
+export {CREAT_PHOTO};
