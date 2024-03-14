@@ -35,7 +35,7 @@ function getValue() {
     'Елена',
     'Наталья'
   ];
-  return {DESCRIPTION,MESSAGE,NAMES}
+  return {DESCRIPTION,MESSAGE,NAMES};
 }
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
