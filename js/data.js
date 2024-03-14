@@ -1,6 +1,6 @@
 
 // !импорт всехперменных
-import { DESCRIPTION,MESSAGE,NAMES,MIN_LIKES,MAX_LIKES,REPEAT_OBJ,MIN_AVATAR,MAX_AVATAR,COMMENTS_MIN,COMMENTS_MAX } from './util.js';
+import { getValue, MIN_LIKES, MAX_LIKES, REPEAT_OBJ, MIN_AVATAR, MAX_AVATAR, COMMENTS_MIN, COMMENTS_MAX } from './util.js';
 // ! импорт функции случайноного числа а до b
 import { getRandomInteger} from './random-integer.js';
 
@@ -20,14 +20,14 @@ const CREAT_URL = CREAT_NUMBER();
 const CREAT_COMMENT = () => ({
   id: CREAT_ID(),
   avatar: `img/avatar/${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
-  message: MESSAGE[getRandomInteger(0, MESSAGE.length - 1)],
-  name: NAMES[getRandomInteger(0, NAMES.length)],
+  message: getValue().MESSAGE[getRandomInteger(0,getValue(). MESSAGE.length - 1)],
+  name: getValue().NAMES[getRandomInteger(0, getValue().NAMES.length)],
 });
 
 const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
   id: CREAT_ID(),
   url: `..photos/${CREAT_URL()}.jpg`,
-  description: DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)],
+  description: getValue().DESCRIPTION[getRandomInteger(0, getValue().DESCRIPTION.length - 1)],
   likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
   comments: Array.from({ length: getRandomInteger(COMMENTS_MIN, COMMENTS_MAX) }, CREAT_COMMENT),
 }));
