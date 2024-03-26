@@ -1,6 +1,6 @@
-import { CREAT_COMMENT } from './util.js';
+import { createComment } from './util.js';
 
-const commenFn = CREAT_COMMENT();
+const commenFn = createComment();
 
 const popap = document.querySelector('.big-picture');
 const mainPicture = popap.querySelector('.big-picture__img img');
@@ -10,7 +10,7 @@ const likeMain = popap.querySelector('.likes-count');
 const numberCommentText = document.querySelector('.social__comment-shown-count');
 const listComment = document.querySelector('.social__comments');
 
-function createComment(commentOBJ) {
+function createElement(commentOBJ) {
   const cloneBlock = document.querySelector('.social__comment').cloneNode(true);
   const cloneImg = cloneBlock.querySelector('.social__picture');
   const cloneDesc = cloneBlock.querySelector('.social__text');
@@ -19,7 +19,7 @@ function createComment(commentOBJ) {
   cloneDesc.textContent = commentOBJ.message;
   return fragmet.appendChild(cloneBlock);
 }
-const commentUser = createComment(commenFn);
+const commentUser = createElement(commenFn);
 
 picturesList.addEventListener('click', (evt) => {
   const target = evt.target;
