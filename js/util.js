@@ -16,7 +16,7 @@ const CREAT_NUMBER = () => {
 const CREAT_ID = CREAT_NUMBER();
 const CREAT_URL = CREAT_NUMBER();
 
-const CREAT_COMMENT = () => ({
+const createComment = () => ({
   id: CREAT_ID(),
   avatar: `img/avatar/${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
   message: getValue().MESSAGE[getRandomInteger(0,getValue(). MESSAGE.length - 1)],
@@ -28,7 +28,7 @@ const CREAT_PHOTO = Array.from({ length: REPEAT_OBJ }, () => ({
   url: `photos/${CREAT_URL()}.jpg`,
   description: getValue().DESCRIPTION[getRandomInteger(0, getValue().DESCRIPTION.length - 1)],
   likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-  comments: Array.from({ length: getRandomInteger(COMMENTS_MIN, COMMENTS_MAX) }, CREAT_COMMENT),
+  comments: Array.from({ length: getRandomInteger(COMMENTS_MIN, COMMENTS_MAX) }, createComment),
 }));
 
-export {CREAT_PHOTO, CREAT_COMMENT};
+export {CREAT_PHOTO, createComment };
